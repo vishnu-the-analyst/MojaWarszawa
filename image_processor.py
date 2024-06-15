@@ -11,7 +11,7 @@ from google.generativeai.protos import Blob
 
 
 bot_token = '7208080314:AAEdsdWIAqNk5jrux7cvKojMQXZ7PmG3SD4'
-GOOGLE_API_KEY="AIzaSyB9zwtlH43IJMALfavtHN4YN-8PukXTtAI"
+GOOGLE_API_KEY="AIzaSyCFurY92HfBmDO1K3gRjGY8y3lAvOK5YjY"
 
 # Function to process image from Telegram and interact with Gemini API
 def process_image_from_telegram(file_id):
