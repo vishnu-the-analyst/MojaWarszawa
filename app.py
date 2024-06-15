@@ -1,8 +1,9 @@
 from flask import Flask, request
-import requests
 import json
 from send_messages import replyinput 
 from image_processor import process_image_from_telegram
+from database_connection import insert_message
+
 
 
 app = Flask(__name__)
@@ -13,10 +14,13 @@ TELEGRAM_BOT_TOKEN = '7208080314:AAEdsdWIAqNk5jrux7cvKojMQXZ7PmG3SD4'
 def webhook():
     body = request.get_json()
     # Your logic to handle the update goes here
+    print(body)
 
     
     message = body.get('message', {})
     user_id = message['chat']['id']
+    
+    insert_message(body)
     
     # Check message type and handle accordingly
     if 'text' in message:
@@ -30,11 +34,8 @@ def webhook():
         photos = message['photo']
         photo_details = photos[-1]  # Get the last (largest) photo in the array
         file_id = photo_details['file_id']
-        file_unique_id = photo_details['file_unique_id']
         caption = message.get('caption', 'No caption provided')
         
-        # Call image processing function from image_processor
-        model = None  # Replace with your model initialization
         response_text = process_image_from_telegram(file_id, )
         replyinput(user_id, f"Processed image with caption: {caption}. Response: {response_text}")
     
@@ -53,7 +54,7 @@ def webhook():
     }
     
     
-    return update
+    return body
 
 if __name__ == '__main__':
     event = app.run(port=5000)
