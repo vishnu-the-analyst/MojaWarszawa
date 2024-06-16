@@ -1,5 +1,3 @@
-Sure! Below is a detailed `README.md` file for your GitHub repository, which explains the purpose, setup, and usage of your project.
-
 ---
 
 # Warsaw Citizen Support Bot
@@ -33,6 +31,7 @@ The Warsaw Citizen Support Bot is a Telegram bot designed to help citizens of Wa
 - MySQL database
 - Telegram Bot Token
 - Google API Key for Generative AI
+- ngrok (for webhook setup)
 
 ### Installation
 
@@ -77,7 +76,33 @@ CREATE TABLE messages (
 );
 ```
 
-## Usage
+### Setting up ngrok
+
+To expose your local server to the internet, you need to use ngrok:
+
+1. **Download and install ngrok**
+
+```sh
+https://ngrok.com/download
+```
+
+2. **Start ngrok**
+
+```sh
+ngrok http 5000
+```
+
+3. **Copy the Forwarding URL**
+
+ngrok will provide a forwarding URL that looks something like `https://abcd1234.ngrok.io`. You will use this URL to set up the Telegram webhook.
+
+4. **Set up the Telegram webhook**
+
+Replace `<NGROK_URL>` with your ngrok forwarding URL:
+
+```sh
+curl -F "url=<NGROK_URL>/webhook" https://api.telegram.org/bot<Your_Telegram_Bot_Token>/setWebhook
+```
 
 ### Running the Bot
 
