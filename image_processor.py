@@ -12,7 +12,7 @@ from database_connection import insert_message
 
 
 bot_token = '7208080314:AAEdsdWIAqNk5jrux7cvKojMQXZ7PmG3SD4'
-GOOGLE_API_KEY="AIzaSyCFurY92HfBmDO1K3gRjGY8y3lAvOK5YjY"
+GOOGLE_API_KEY="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
 AVAILABLE_PUBLIC_SERVICES = [
     "Waste Management",
