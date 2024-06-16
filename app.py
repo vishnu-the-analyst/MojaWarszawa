@@ -1,7 +1,7 @@
 from flask import Flask, request
 import json
 from send_messages import replyinput 
-from image_processor import process_image_from_telegram
+from image_processor import process_image_from_telegram, process_text_from_telegram
 from database_connection import insert_message
 
 
@@ -27,21 +27,20 @@ def webhook():
         # Process text message
         in_message = message['text']
         processed = in_message.lower()
-        replyinput(user_id, processed)
+        
+        replyinput(user_id, process_text_from_telegram(processed))
     
     elif 'photo' in message:
         # Process photo message using image_processor
         photos = message['photo']
         photo_details = photos[-1]  # Get the last (largest) photo in the array
         file_id = photo_details['file_id']
-        caption = message.get('caption', 'No caption provided')
-        
-        response_text = process_image_from_telegram(file_id, )
-        replyinput(user_id, f"Processed image with caption: {caption}. Response: {response_text}")
+        response_text = process_image_from_telegram(file_id,message.get('caption', 'No caption provided'))
+        replyinput(user_id, response_text)
     
     elif 'location' in message:
         # Handle location message
-        replyinput(user_id, "Received a location")
+        replyinput(user_id, "Location Received")
     
     else:
         # Handle other types of messages or no specific content
